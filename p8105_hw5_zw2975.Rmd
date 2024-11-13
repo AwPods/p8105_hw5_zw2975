@@ -11,7 +11,13 @@ library(dplyr)
 library(ggplot2)
 library(patchwork)
 library(knitr)
+library(rvest)
 ```
 
 
 ## Problem 1
+
+```{r p1}
+
+```
+
