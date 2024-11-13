@@ -1,0 +1,17 @@
+---
+title: "p8105_hw5_zw2975"
+author: "Zhiyu Wei"
+date: 2024-11-14
+output: github_document
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(knitr)
+```
+
+
+## Problem 1
