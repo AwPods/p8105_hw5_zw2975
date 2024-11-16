@@ -73,7 +73,7 @@ power_sim = function(mu, n = 30, sigma = 5, num_sim = 5000, alpha = 0.05) {
 mu_values = 0
 sim_results = bind_rows(lapply(mu_values, power_sim))
 
-mu_values = 1:6
+mu_values = 0:6
 sim_results = bind_rows(lapply(mu_values, power_sim))
 
 # Calculate power and mean estimates for each mu
@@ -85,7 +85,7 @@ power_results = sim_results |>
 
 ```
 
-
+##### plot 1
 ```{r plot 1}
 ggplot(power_results, aes(x = true_mu, y = power)) +
   geom_line() +
@@ -97,3 +97,31 @@ ggplot(power_results, aes(x = true_mu, y = power)) +
   )
 
 ```
+
+
+##### plot 2
+```{r plot 2}
+
+ggplot(power_results, aes(x = true_mu)) +
+  geom_line(aes(y = avg_estimate), color = "blue", linetype = "dashed") +
+  geom_line(aes(y = avg_estimate_rejected), color = "red") +
+  geom_point(aes(y = avg_estimate), color = "blue") +
+  geom_point(aes(y = avg_estimate_rejected), color = "red") +
+  labs(
+    title = "Average Estimate of μ̂ vs. True Mean",
+    x = "True Mean (μ)",
+    y = "Average Estimate of μ̂"
+  ) +
+  scale_color_manual(
+    values = c("blue" = "Average Estimate", "red" = "Rejected Null Avg Estimate"),
+    name = "Estimate Type"
+  )
+```
+
+
+
+## Problem 3
+```{r}
+
+```
+
