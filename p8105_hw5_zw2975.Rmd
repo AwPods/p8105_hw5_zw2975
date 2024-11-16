@@ -125,6 +125,8 @@ homic = read.csv("./data files/homicide-data.csv")
 ```
 
 ###### Description of raw data
+The dataset contains `r ncol(homic)` and `r nrow(homic)` records of homicides from `50` major U.S. cities, with details on each case such as victim demographics (`age`, `race`, `sex`), location (`city`, `state`, `latitude`, `longitude`), and case status (`Closed by arrest`, `Closed without arrest`, or `Open/No arrest`). 
+
 
 ```{r data manipulation}
 # create city_state variable
@@ -138,7 +140,6 @@ summary = homic |>
     Total_homicides = n(),
     Unsolved_homicides = sum(disposition %in% c("Closed without arrest", "Open/No arrest"))
   )
-
 ```
 
 
