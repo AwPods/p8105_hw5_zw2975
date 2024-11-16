@@ -91,8 +91,8 @@ ggplot(power_results, aes(x = true_mu, y = power)) +
   geom_line() +
   geom_point() +
   labs(
-    title = "Power vs. True Mean",
-    x = "True Mean (μ)",
+    title = "Power vs. True μ",
+    x = "True μ",
     y = "Power (Proportion of Null Rejections)"
   )
 
@@ -107,9 +107,9 @@ ggplot(power_results, aes(x = true_mu)) +
   geom_point(aes(y = avg_estimate), color = "blue") +
   geom_point(aes(y = avg_estimate_rejected), color = "red") +
   labs(
-    title = "Average Estimate of μ̂ vs. True Mean",
-    x = "True Mean (μ)",
-    y = "Average Estimate of μ̂"
+    title = "Average Estimate of μ vs. True μ",
+    x = "True μ",
+    y = "Average Estimate of μ"
   ) +
   scale_color_manual(
     values = c("blue" = "Average Estimate", "red" = "Rejected Null Avg Estimate"),
@@ -117,10 +117,44 @@ ggplot(power_results, aes(x = true_mu)) +
   )
 ```
 
-
-
 ## Problem 3
-```{r}
 
+```{r P3}
+# import data
+homic = read.csv("./data files/homicide-data.csv")
+```
+
+###### Description of raw data
+
+```{r data manipulation}
+# create city_state variable
+homic = mutate(homic,
+           city_state= paste(city, state, sep=', '))
+
+# get summary data
+homic |> 
+  group_by(city_state)|>
+  summarise(
+    Total_homicides = n(),
+    Unsolved_homicides = sum(disposition %in% c("Closed without arrest", "Open/No arrest"))
+  )
+
+```
+
+```{r prop test}
+# only leaves out Baltimore, MD
+baltimore = homic |>
+  filter(city_state =="Baltimore, MD")
+
+# Apply prop.test
+baltimore_test <- prop.test(baltimore_summary$unsolved_homicides, baltimore_summary$total_homicides)
+
+# Tidy the results
+Bal_titdy <- broom::tidy(baltimore_test)
+
+# Extract proportion and confidence interval
+baltimore_results <- Bal_titdy %>%
+  select(estimate, conf.low, conf.high)
+print(baltimore_results)
 ```
 
