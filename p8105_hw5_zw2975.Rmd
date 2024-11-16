@@ -44,7 +44,6 @@ ggplot(data.frame(sizes=size, probability=prob), aes(x = size, y = prob))+
     x = "sample size(n)",
     y = "probability of shared birthdays"
   )
-
 ```
 
 ##### Comment
@@ -95,6 +94,7 @@ power_results = sim_results |>
 ```
 
 ##### plot 1
+
 ```{r plot 1}
 ggplot(power_results, aes(x = true_mu, y = power)) +
   geom_line() +
@@ -104,11 +104,11 @@ ggplot(power_results, aes(x = true_mu, y = power)) +
     x = "True μ",
     y = "Power (Proportion of Null Rejections)"
   )
-
 ```
 
 
 ##### plot 2
+
 ```{r plot 2, warning = FALSE}
 ggplot(power_results, aes(x = true_mu)) +
   geom_line(aes(y = avg_estimate), color = "blue", linetype = "dashed") +
@@ -140,9 +140,8 @@ homic = read.csv("./data files/homicide-data.csv")
 ```
 
 ###### Description of raw data
+
 The dataset contains `r ncol(homic)` and `r nrow(homic)` records of homicides from `50` major U.S. cities, with details on each case such as victim demographics (`age`, `race`, `sex`), location (`city`, `state`, `latitude`, `longitude`), and case status (`Closed by arrest`, `Closed without arrest`, or `Open/No arrest`). 
-
-
 ```{r data manipulation}
 # create city_state variable
 homic = mutate(homic,
@@ -193,7 +192,6 @@ city_results = summary |>
 #sort out proportions of unsolved homicides
 city_results = city_results |>
   arrange(desc(estimate))
-
 # Plot
 ggplot(city_results, aes(x = reorder(city_state, estimate), y = estimate)) +
   geom_point(size = 3, color = "red") +  
@@ -204,6 +202,6 @@ ggplot(city_results, aes(x = reorder(city_state, estimate), y = estimate)) +
     x = "City",
     y = "Estimated proportion of unsolved Homicides (high to low)"
   ) + 
-  coord_flip()   # Flip the coordinates for better readability
+  coord_flip()   # Flip the coordinates for better view
 ```
 
