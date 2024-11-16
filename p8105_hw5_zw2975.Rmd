@@ -159,7 +159,7 @@ balt_results = Bal_tidy |>
 print(balt_results)
 
 ```
-```{r running prop test for each city}
+```{r running prop test for each city, warning=FALSE}
 
 ### original
 city_results = summary |>
