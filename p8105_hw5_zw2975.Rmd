@@ -47,6 +47,15 @@ ggplot(data.frame(sizes=size, probability=prob), aes(x = size, y = prob))+
 
 ```
 
+##### Comment
+
+The plot shows a paradox phenomenon, even with a small group (around 25 people for sample size), the probability of shared birthdays exceeds 50%. This probability approaches 100% as the group size nears 50, illustrating the counter intuitive likelihood of shared birthdays in relatively small groups.
+
+The line shows an increase in probability of shared birthday declines as the sample size approaches 30. 
+
+These patterns may be due to the normal distribution pattern of birthdays across the year when the birthday function was created.
+
+
 ## Problem 2
 ```{r p2}
 # set fixed design elements
@@ -112,11 +121,16 @@ ggplot(power_results, aes(x = true_mu)) +
     y = "Average Estimate of μ"
   ) +
   scale_color_manual(
-    values = c("blue" = "Average Estimate", "red" = "Rejected Null Avg Estimate"),
+    values = c("Average Estimate" = "blue", "Rejected Null Avg Estimate" = "red"),
     name = "Estimate Type"
   )
 ```
 
+##### Comment
+
+The average estimate of μ across all samples (blue dashed line) closely follows the true value of μ, indicating unbiased estimation. However, the red solid line (representing estimates from samples where the null was rejected) shows a consistent upward bias, especially at lower μ values. 
+
+This bias arises because samples with larger effect sizes are more likely to reject the null, leading to a selection effect where only extreme estimates are considered. Hence, the sample average of μ in cases where the null is rejected overestimates the true μ.
 
 ## Problem 3
 
