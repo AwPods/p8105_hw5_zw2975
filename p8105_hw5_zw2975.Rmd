@@ -52,7 +52,7 @@ The plot shows a paradox phenomenon, even with a small group (around 25 people f
 
 The line shows an increase in probability of shared birthday declines as the sample size approaches 30. 
 
-These patterns may be due to the normal distribution pattern of birthdays across the year when the birthday function was created.
+These patterns is due to the normal distribution of birthdays across the year when the birthday function was created.
 
 
 ## Problem 2
@@ -117,7 +117,7 @@ ggplot(power_results, aes(x = true_mu)) +
   geom_point(aes(y = avg_estimate_rejected), color = "red") +
   labs(
     title = "Average Estimate of μ vs. True μ
-    (red = Avereage estimate rejected, blue = Average estimate of μ",
+    (red = Avereage estimate rejected, blue = Average estimate of μ)",
     x = "True μ",
     y = "Average Estimate of μ") 
 
