@@ -150,7 +150,7 @@ balt_summary = summary |>
 # Apply prop.test
 bal_test = prop.test(balt_summary$Unsolved_homicides, balt_summary$Total_homicides)
 
-# broom::tiday the results
+# broom::tidy the results
 Bal_tidy = broom::tidy(bal_test)
 
 # Extract proportion and confidence interval
@@ -174,6 +174,19 @@ city_results = summary |>
 
 
 ```{r Problem 3 plot}
+#sort out proportions of unsolved homicides
+city_results = city_results |>
+  arrange(desc(estimate))
 
+# Plot
+ggplot(city_results, aes(x = reorder(city_state, estimate), y = estimate)) +
+  geom_point(size = 3, color = "red") +  
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, color = "gray") +  # Error bars
+  coord_flip() +  # Flip the coordinates for better readability
+  labs(
+    title = "Proportion of unsolved homicides by city",
+    x = "City",
+    y = "Estimated proportion of unsolved Homicides (high to low)"
+  ) 
 ```
 
