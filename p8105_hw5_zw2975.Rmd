@@ -181,12 +181,13 @@ city_results = city_results |>
 # Plot
 ggplot(city_results, aes(x = reorder(city_state, estimate), y = estimate)) +
   geom_point(size = 3, color = "red") +  
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, color = "gray") +  # Error bars
-  coord_flip() +  # Flip the coordinates for better readability
+  # error bar chart
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, color = "gray") +
   labs(
     title = "Proportion of unsolved homicides by city",
     x = "City",
     y = "Estimated proportion of unsolved Homicides (high to low)"
-  ) 
+  ) + 
+  coord_flip()   # Flip the coordinates for better readability
 ```
 
