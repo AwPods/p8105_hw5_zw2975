@@ -101,7 +101,6 @@ ggplot(power_results, aes(x = true_mu, y = power)) +
 
 ##### plot 2
 ```{r plot 2}
-
 ggplot(power_results, aes(x = true_mu)) +
   geom_line(aes(y = avg_estimate), color = "blue", linetype = "dashed") +
   geom_line(aes(y = avg_estimate_rejected), color = "red") +
