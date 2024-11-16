@@ -132,7 +132,7 @@ homic = mutate(homic,
            city_state= paste(city, state, sep=', '))
 
 # get summary data
-homic |> 
+summary = homic |> 
   group_by(city_state)|>
   summarise(
     Total_homicides = n(),
@@ -141,20 +141,33 @@ homic |>
 
 ```
 
+
 ```{r prop test}
 # only leaves out Baltimore, MD
-baltimore = homic |>
+balt_summary = summary |>
   filter(city_state =="Baltimore, MD")
 
 # Apply prop.test
-baltimore_test <- prop.test(baltimore_summary$unsolved_homicides, baltimore_summary$total_homicides)
+bal_test = prop.test(balt_summary$Unsolved_homicides, balt_summary$Total_homicides)
 
 # Tidy the results
-Bal_titdy <- broom::tidy(baltimore_test)
+Bal_tidy <- broom::tidy(bal_test)
 
 # Extract proportion and confidence interval
-baltimore_results <- Bal_titdy %>%
+balt_results <- Bal_tidy |>
   select(estimate, conf.low, conf.high)
-print(baltimore_results)
+print(balt_results)
+```
+```{r running prop test for each city}
+# Apply prop.test
+test = prop.test(summary$Unsolved_homicides, summary$Total_homicides)
+
+# Tidy the results
+tidy <- broom::tidy(test)
+
+# Extract proportion and confidence interval
+city_results <- tidy |>
+  select(estimate, conf.low, conf.high)
+print(city_results)
 ```
 
