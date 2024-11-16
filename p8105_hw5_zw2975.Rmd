@@ -24,11 +24,11 @@ birthdays = sample (1:n_days, x, replace = TRUE)
 return(any(duplicated(birthdays)))
 }
 
-set.seed(1)# set a seed
+set.seed(1)# set a seed 
 
-# for a sample size of 2 to 50 people
+# sample size of 2 to 50 people
 size = 2:50
-prob = numeric(length(size)) #create a probability to be filled in
+prob = numeric(length(size)) #create a probability tibble to be filled in
 
 for(i in size) {
   output = replicate(10000, bd_function(i))
