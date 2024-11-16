@@ -150,24 +150,30 @@ balt_summary = summary |>
 # Apply prop.test
 bal_test = prop.test(balt_summary$Unsolved_homicides, balt_summary$Total_homicides)
 
-# Tidy the results
-Bal_tidy <- broom::tidy(bal_test)
+# broom::tiday the results
+Bal_tidy = broom::tidy(bal_test)
 
 # Extract proportion and confidence interval
-balt_results <- Bal_tidy |>
+balt_results = Bal_tidy |>
   select(estimate, conf.low, conf.high)
 print(balt_results)
+
 ```
 ```{r running prop test for each city}
-# Apply prop.test
-test = prop.test(summary$Unsolved_homicides, summary$Total_homicides)
 
-# Tidy the results
-tidy <- broom::tidy(test)
+### original
+city_results = summary |>
+  mutate(
+    test_results = map2(Unsolved_homicides, Total_homicides, ~ prop.test(.x, .y))
+  ) |>
+  mutate(tidy_results = map(test_results, broom::tidy)) |>
+  unnest(tidy_results)|>
+  select(city_state, estimate, conf.low, conf.high, p.value)
 
-# Extract proportion and confidence interval
-city_results <- tidy |>
-  select(estimate, conf.low, conf.high)
-print(city_results)
+```
+
+
+```{r Problem 3 plot}
+
 ```
 
